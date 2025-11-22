@@ -67,7 +67,7 @@ function Movies() {
                                 <td>{movie.tahunRilis}</td>
                                 <td>{movie.sutradara}</td>
                                 <td>
-                                    <button className="btn btn-danger" onClick={() => handleDelete(movie._id)}>Delete</button> 
+                                    <Button className="btn btn-danger" onClick={() => handleDelete(movie._id)}>Delete</Button> 
                                 </td>
                             </tr>
                         })
