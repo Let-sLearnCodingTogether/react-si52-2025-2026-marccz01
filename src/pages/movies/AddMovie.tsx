@@ -37,7 +37,7 @@ function AddMovies() {
     return <div className="container mx-auto">
         <div className="d-flex justify-content-between my-3">
         <h4>Add Movie Page</h4>
-        <NavLink to="/" className="btn btn-primary">List Movie</NavLink>
+        <NavLink to="/movies" className="btn btn-primary">List Movie</NavLink>
         </div>
     <div>
         <Form onSubmit={handleSumbit}>
@@ -70,7 +70,7 @@ function AddMovies() {
             </Form.Group>
 
             <Button type="submit" variant="primary">
-                HMM
+                PENCET
             </Button>
         </Form>
     </div>
