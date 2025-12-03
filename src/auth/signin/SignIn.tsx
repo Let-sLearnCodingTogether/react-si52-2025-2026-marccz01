@@ -3,16 +3,13 @@ import { Button, Form } from "react-bootstrap";
 import ApiClient from "../../utils/ApiClient";
 import { NavLink } from "react-router";
 
-interface SignUpForm {
-    username : string,
+interface SignInForm {
     email : string,
     password : string
 }
 
-
-function SignUp() {
-    const [ form, setForm ] = useState<SignUpForm>({
-        username : "",
+function SignIn() {
+        const [ form, setForm ] = useState<SignInForm>({
         email : "",
         password : ""
     });
@@ -29,7 +26,7 @@ function SignUp() {
         event.preventDefault();
 
         try {
-            const response = await ApiClient.post("/signup", form);
+            const response = await ApiClient.post('/signin', form);
             console.log(response);
         } catch (error) {
             console.log(error);
@@ -37,17 +34,8 @@ function SignUp() {
     }
 
     return <div className="container mx-auto">
-            <h4>Sign Up Page</h4>
+            <h2>Sign In Page</h2>
         <Form>
-            <Form.Group className="mb-3" controlId="formUsername">
-                <Form.Label>Username</Form.Label>
-                <Form.Control
-                    value={form.username}
-                    onChange={onHandleChange}
-                    name="username"
-                    type="text"
-                    placeholder="Username Address"/>
-            </Form.Group>
             <Form.Group className="mb-3" controlId="formEmail">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
@@ -66,15 +54,14 @@ function SignUp() {
                     type="password"
                     placeholder="Password Address"/>
             </Form.Group>
-
             <Button type="submit" variant="primary">
-                MASOK JOK
+                MASOK LAH CEPET
             </Button>
-            <NavLink to="/signIn" className="btn btn-link">
-                La Punyo Akun? Sign In Lah
+            <NavLink to='/signUp' className="btn btn-link">
+                KALO BLOM PUNYO SIGN UP COY
             </NavLink>
         </Form>
         </div>
 }
 
-export default SignUp;
+export default SignIn;
