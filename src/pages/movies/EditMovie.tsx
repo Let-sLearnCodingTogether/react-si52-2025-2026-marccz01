@@ -58,11 +58,10 @@ function EditMovie() {
     const handleSumbit = async (event : FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await ApiClient.post(`/movie/${params.id}`, form);
+            const response = await ApiClient.put(`/movie/${params.id}`, form);
             navigate("/movies", {
                 replace : true
             })
-            console.log(response);
         } catch (error) {
             console.log(error);
         }
@@ -108,7 +107,7 @@ function EditMovie() {
             </Form.Group>
 
             <Button type="submit" variant="primary">
-                PENCET
+                DAH
             </Button>
         </Form>
     </div>
