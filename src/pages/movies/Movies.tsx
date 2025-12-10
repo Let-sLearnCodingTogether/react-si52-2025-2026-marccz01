@@ -67,8 +67,10 @@ function Movies() {
                                 <td>{movie.tahunRilis}</td>
                                 <td>{movie.sutradara}</td>
                                 <td>
+                                    <NavLink to={`/movies/edit-movie/${movie._id}`}
+                                    className="btn btn-warning me-2">Edit</NavLink>
                                     <Button className="btn btn-danger" onClick={() => handleDelete(movie._id)}>Delete</Button> 
-                                </td>
+                                </td> 
                             </tr>
                         })
                     }
@@ -77,5 +79,4 @@ function Movies() {
         </div>
     </div>
 }
-
 export default Movies

@@ -1,7 +1,9 @@
-import { useState, type ChangeEvent, type FormEvent } from "react"
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react"
 import { Button, Form } from "react-bootstrap"
 import { NavLink } from "react-router"
 import ApiClient from "../../utils/ApiClient"
+import { useParams } from "react-router"
+import { useNavigate } from "react-router"
 
 interface FromMovie {
     judul : string,
@@ -9,12 +11,42 @@ interface FromMovie {
     sutradara : string
 }
 
-function AddMovies() {
+interface ResponseData {
+    data : {
+        _id : string,
+        judul : string,
+        tahunRilis : string,
+        sutradara : string,
+        createdBy : string,
+        createdAt : string,
+        updateAt : string,
+        _v : string
+    },
+    message : string
+}
+
+function EditMovie() {
+    const params = useParams()
+    const navigate = useNavigate()
     const [form, setForm] = useState<FromMovie>({
         judul : "",
         tahunRilis : "",
-        sutradara : ""
+        sutradara : "",
+
     })
+
+    const fetchMovie = useCallbBack(async() => {
+        const response = await ApiClient.get(`/movie/${params.id}`)
+        
+        if(response.status === 200) {
+            const responseData : ResponseData = response.data
+            setForm({
+                judul : responseData.data.judul,
+                tahunRilis : responseData.data.tahunRilis,
+                sutradara : responseData.data.sutradara
+            })
+        }
+    }, [params])
 
     const handleInputChange = (event : ChangeEvent<HTMLInputElement>) => {
         const {name, value} = event.target
@@ -27,16 +59,23 @@ function AddMovies() {
     const handleSumbit = async (event : FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await ApiClient.post("/movie", form);
+            const response = await ApiClient.post(`/movie/${params.id}`, form);
+            navigate("/movies", {
+                replace : true
+            })
             console.log(response);
         } catch (error) {
             console.log(error);
         }
     }
 
+    useEffect(() => {
+        fetchMovie()
+    }, [fetchMovie])
+
     return <div className="container mx-auto">
         <div className="d-flex justify-content-between my-3">
-        <h4>Add Movie Page</h4>
+        <h4>Edit Movie Page</h4>
         <NavLink to="/movies" className="btn btn-primary">List Movie</NavLink>
         </div>
     <div>
@@ -76,4 +115,8 @@ function AddMovies() {
     </div>
 </div>
 }
-export default AddMovies
+export default EditMovie
+
+function useCallbBack(arg0: () => Promise<void>, arg1: any[]) {
+    throw new Error("Function not implemented.")
+}
