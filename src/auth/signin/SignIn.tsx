@@ -67,7 +67,7 @@ function SignIn() {
                     placeholder="Password Address"/>
             </Form.Group>
             <Button type="submit" variant="primary" disabled={isLoading}>
-                {isLoading ? "Loading..." : "Sign In"}
+                {isLoading ? "Loading..." : "MASOKLA"}
             </Button>
             <NavLink to='/signUp' className="btn btn-link">
                 KALO BLOM PUNYO SIGN UP COY

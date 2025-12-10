@@ -1,9 +1,8 @@
-import { useEffect, useState, type ChangeEvent, type FormEvent } from "react"
+import { useCallback, useEffect, useState, type ChangeEvent, type FormEvent } from "react"
 import { Button, Form } from "react-bootstrap"
 import { NavLink } from "react-router"
 import ApiClient from "../../utils/ApiClient"
-import { useParams } from "react-router"
-import { useNavigate } from "react-router"
+import { useParams, useNavigate } from "react-router"
 
 interface FromMovie {
     judul : string,
@@ -35,7 +34,7 @@ function EditMovie() {
 
     })
 
-    const fetchMovie = useCallbBack(async() => {
+    const fetchMovie = useCallback(async() => {
         const response = await ApiClient.get(`/movie/${params.id}`)
         
         if(response.status === 200) {
